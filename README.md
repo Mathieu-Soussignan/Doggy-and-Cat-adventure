@@ -4,6 +4,7 @@
 
 ```sh
 backend/
+├── archive/                       # Legacy code
 ├── data/
 │   ├── images/
 │   │   ├── train/
@@ -141,6 +142,14 @@ streamlit run app.py
 
 ---
 
+### Interface avec 3 onglets : Image 🖼️, Audio 🎵, Multimodal 🧹
+
+* Upload fichiers
+* Appel à l’API appropriée
+* Affichage prédiction + confiance + UX animée
+
+---
+
 ### À noter :
 
 * Le frontend Streamlit ne contient pas de logique métier : il **consomme l’API backend**.
@@ -149,11 +158,49 @@ streamlit run app.py
 
 ---
 
-## En résumé :
+## Modèles IA
 
-| Composant   | Tech utilisée                              | Rôle                                    |
-| ----------- | ------------------------------------------ | --------------------------------------- |
-| API backend | FastAPI + TensorFlow                       | Point d’entrée des prédictions IA       |
-| Frontend UI | Streamlit + Lottie                         | Interface utilisateur, légère et stylée |
-| Modèles IA  | CNN, MobileNetV2                           | Classifieur Chien / Chat (via image)    |
-| Déploiement | Local (dev), compatible HuggingFace/Render | Facilement extensible                   |
+| Type       | Modèle                      | Détail                                 |
+| ---------- | --------------------------- | -------------------------------------- |
+| Image      | MobileNetV2                 | Fine-tuné sur images chiens/chats      |
+| Audio      | YAMNet                      | Classifie aboiement vs miaulement      |
+| Multimodal | Fusion MobileNetV2 + YAMNet | Fusion Dense sur embeddings concaténés |
+
+---
+
+## Avancement
+
+* ✅ Modèles image/audio/multimodal prêts
+* ✅ API FastAPI avec endpoints actifs
+* ✅ Streamlit avec 3 modes fonctionnels
+* ✅ Bonne précision (multimodal > 95 %)
+
+---
+
+## Prochaines étapes
+
+* 🔹 Ajout d’un benchmark comparatif
+* 🔹 Nettoyage des fichiers orphelins
+* 🔹 Prédiction "aucun des deux"
+* 🔹 Déploiement cloud (Render / HF Spaces)
+
+---
+
+## Stack technique
+
+| Composant | Tech                        |
+| --------- | --------------------------- |
+| Backend   | FastAPI, TensorFlow, YAMNet |
+| Frontend  | Streamlit, Lottie           |
+| Modèles   | CNN, MobileNetV2, YAMNet    |
+| CI/CD     | GitHub Actions              |
+
+---
+
+## Crédits
+
+Projet réalisé dans le cadre de la formation de \[Développeur en Intelligence Artificielle] à \[Simplon.co]
+- Mathieu Soussignan
+- Chris El-Pulpo
+- Arnaud Boy
+- Anthony Vallad
